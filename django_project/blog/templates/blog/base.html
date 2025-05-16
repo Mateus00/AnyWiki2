@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block head_title %}{% endblock head_title %}
+{% block content %}
+    <div class="container text-decoration-none">
+        <div class="row">
+            <div class="col-md-8">
+                <h1 class="page-header">
+                    {% block title %}Bem vindo ao meu blog{% endblock %}
+                </h1>
+                {% block blog_content %}
+                {% endblock blog_content %}
+                <hr>
+                <p>
+                    <a href='/blog'><- Voltar para a Home</a>
+                </p>
+                <hr>
+            </div>
+            <div class="col-md-4">
+                {% block categorias %}
+                {% endblock categorias %}
+                <div class="well">
+                    <h4>Sua Propagando Aqui..</h4>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </div>
+{% endblock content %}

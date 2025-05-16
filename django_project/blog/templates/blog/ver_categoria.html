@@ -1,0 +1,20 @@
+
+
+{% extends "blog/base.html" %}
+
+{% block head_title %}Vendo categoria {{ categoria.titulo }}{% endblock %}
+{% block title %}{{ categoria.titulo }}{% endblock %}
+
+{% block blog_content %}
+    {% if posts %}
+        <div class="well">
+            <ul>
+            {% for post in posts %}
+                <li><a href="{{ post.get_url_absoluta }}">{{ post.titulo }}</a></li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% else %}
+        <p>Não existem posts para essa categoria.</p>
+    {% endif %}
+{% endblock %}

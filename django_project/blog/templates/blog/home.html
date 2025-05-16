@@ -1,0 +1,52 @@
+{% extends "blog/base.html" %}
+{% block head_title %}
+    Bem Vindos
+{% endblock head_title %}
+{% block blog_content %}
+    {% if posts %}
+        {% for post in posts %}
+            <div class="card" style="width: 46rem;">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a style="text-decoration: none"
+                        class="card-title"
+                        href="{{ post.get_url_absoluta }}">{{ post.titulo }}</a>
+                    </h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                    <p class="card-text">{{ post.corpo }}</p>
+                    <p>
+                        <span class="glyphicon glyphicon-time">Postado em {{ post.data|date:"d/m/Y" }} às 10:00 PM</span>
+                    </p>
+                    <a href="{{ post.get_url_absoluta }}" class="card-link">Leia Mais ...</a>
+                    <a href="{{ post.get_url_absoluta }}" class="card-link">Another link</a>
+                </div>
+            </div>
+            <hr>
+        {% endfor %}
+    {% else %}
+        <p>Não há nenhum post adicionado.</p>
+    {% endif %}
+{% endblock blog_content %}
+
+{% block categorias %}
+    <div class="well">
+        <h4>Categorias do Blog</h4>
+        <div class="row">
+            {% block categorias-content %}
+                {% if categorias %}
+                    <div class="col-lg-12">
+                        <ul class="list-unstyled">
+                            {% for categoria in categorias %}
+                                <li>
+                                    <a href="{{ categoria.get_url_absoluta }}">{{ categoria.titulo }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% else %}
+                    <p>Não há nenhuma categoria adicionada.</p>
+                {% endif %}
+            {% endblock %}
+        </div>
+    </div>
+{% endblock categorias %}
