@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-l%$b^a5is#u5s-1rulibi-uu1xc7g#7-88%8&*5e=hdp!6e5!k
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -56,7 +56,7 @@ ROOT_URLCONF = 'django_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -118,8 +118,12 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# Diretório onde os arquivos estáticos serão coletados com collectstatic
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Diretórios onde estão seus arquivos estáticos durante o desenvolvimento
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
+    os.path.join(BASE_DIR, 'static'),
 ]
 
 # Default primary key field type
