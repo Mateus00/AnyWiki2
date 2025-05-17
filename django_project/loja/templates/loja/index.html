@@ -1,0 +1,41 @@
+{% extends 'loja/base.html' %}
+{% load static %}
+{% block head_title %}Início - Loja Virtual{% endblock %}
+{% block title %}Início - Loja Virtual{% endblock %}
+{% block loja_content %}
+    <!-- Carrossel -->
+    <div id="carouselExampleIndicators"
+         class="carousel slide mb-5"
+         data-bs-ride="carousel">
+        <div class="carousel-inner rounded-4">
+            {% for produto in produtos %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <img src="{{ produto.imagem.url }}"
+                         class="d-block w-100"
+                         alt="{{ produto.nome }}">
+                </div>
+            {% endfor %}
+        </div>
+        <!-- Botões de navegação -->
+        <button class="carousel-control-prev"
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+            <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next"
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+            <span class="visually-hidden">Próximo</span>
+        </button>
+    </div>
+    <!-- Produtos -->
+    <div class="row">
+        {% for produto in produtos %}
+            <div class="col-md-4 mb-4">{% include 'loja/produto_card.html' %}</div>
+        {% endfor %}
+    </div>
+{% endblock %}

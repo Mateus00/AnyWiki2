@@ -1,0 +1,8 @@
+.bg-gradient-purple-black {
+    background: linear-gradient(to right, #7b1fa2, #000000);
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}

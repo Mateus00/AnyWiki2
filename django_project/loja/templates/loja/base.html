@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block content %}
+    <nav class="navbar navbar-dark bg-gradient-purple-black px-4">
+        <a class="navbar-brand text-white fw-bold" href="{% url 'loja:index' %}">Minha Loja</a>
+    </nav>
+
+    <div class="container mt-4">
+        <h1 class="mb-4">Bem-vindo à Minha Loja</h1>
+        {% block loja_content %}{% endblock %}
+    </div>
+{% endblock content %}

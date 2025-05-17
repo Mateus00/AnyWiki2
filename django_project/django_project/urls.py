@@ -25,8 +25,9 @@ urlpatterns = [
     path('', views.homepage),
     path('posts/', views.posts),
     path('sobre/', views.sobre),
-    path('blog/', include('blog.urls'))
-]
+    path('blog/', include('blog.urls')),
+    path('loja/', include('loja.urls')),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

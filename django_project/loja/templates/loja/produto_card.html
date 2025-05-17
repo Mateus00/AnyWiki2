@@ -1,0 +1,10 @@
+<div class="card h-100 bg-gradient-purple-black text-white shadow-lg border-0">
+    <img src="{{ produto.imagem.url }}" class="card-img-top" alt="{{ produto.nome }}">
+    <div class="card-body">
+        <h5 class="card-title">{{ produto.nome }}</h5>
+        <p class="card-text">{{ produto.descricao|truncatechars:100 }}</p>
+    </div>
+    <div class="card-footer bg-transparent border-0">
+        <strong class="text-warning">R$ {{ produto.preco }}</strong>
+    </div>
+</div>
