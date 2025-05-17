@@ -21,7 +21,7 @@
                            class="text-decoration-none text-light">{{ post.titulo }}</a>
                     </h5>
                     <h6 class="card-subtitle mb-3 small">Postado em {{ post.data|date:"d/m/Y" }}</h6>
-                    <p class="card-text lh-lg fs-6">{{ post.corpo|truncatewords:40 }}</p>
+                    <p class="card-text lh-lg fs-6">{{ post.descricao|truncatewords:40 }}</p>
                     <a href="{{ post.get_url_absoluta }}" class="card-link">Leia mais...</a>
                 </div>
             </div>
