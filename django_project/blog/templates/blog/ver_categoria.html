@@ -1,20 +1,24 @@
-
-
 {% extends "blog/base.html" %}
 
 {% block head_title %}Vendo categoria {{ categoria.titulo }}{% endblock %}
 {% block title %}{{ categoria.titulo }}{% endblock %}
 
 {% block blog_content %}
+<div class="container my-4">
+    <h2 class="mb-4 text-center">{{ categoria.titulo }}</h2>
+
     {% if posts %}
-        <div class="well">
-            <ul>
+        <div class="list-group">
             {% for post in posts %}
-                <li><a href="{{ post.get_url_absoluta }}">{{ post.titulo }}</a></li>
+                <a href="{{ post.get_url_absoluta }}" class="list-group-item list-group-item-action">
+                    {{ post.titulo }}
+                </a>
             {% endfor %}
-            </ul>
         </div>
     {% else %}
-        <p>Não existem posts para essa categoria.</p>
+        <div class="alert alert-warning text-center" role="alert">
+            Não existem posts para essa categoria.
+        </div>
     {% endif %}
+</div>
 {% endblock %}

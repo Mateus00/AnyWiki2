@@ -1,31 +1,38 @@
 {% extends "layout.html" %}
-{% block head_title %}{% endblock head_title %}
+{% block head_title %}
+    {% block title %}
+        Bem-vindo ao meu blog
+    {% endblock title %}
+{% endblock head_title %}
 {% block content %}
-    <div class="container text-decoration-none">
+    <div class="container my-4">
         <div class="row">
+            <!-- Conteúdo principal -->
             <div class="col-md-8">
-                <h1 class="page-header">
-                    {% block title %}Bem vindo ao meu blog{% endblock %}
-                </h1>
+                <h1 class="page-header mb-4">{{ post.titulo }}</h1>
                 {% block blog_content %}
+                    <p>Sem conteúdo no momento.</p>
                 {% endblock blog_content %}
-                <hr>
+                <hr class="my-4">
                 <p>
-                    <a href='/blog'><- Voltar para a Home</a>
+                    <a href="/blog" class="text-decoration-none">&larr; Voltar para a Home</a>
                 </p>
                 <hr>
             </div>
+            <!-- Barra lateral -->
             <div class="col-md-4">
                 {% block categorias %}
+                    <!-- Você pode adicionar categorias aqui -->
                 {% endblock categorias %}
-                <div class="well">
-                    <h4>Sua Propagando Aqui..</h4>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.
-                    </p>
+                <div class="card mt-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Sua Propaganda Aqui</h5>
+                        <p class="card-text">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-        <hr>
     </div>
 {% endblock content %}
