@@ -6,12 +6,13 @@
     <!-- Carrossel -->
     <div id="carouselExampleIndicators"
          class="carousel slide mb-5"
-         data-bs-ride="carousel">
-        <div class="carousel-inner rounded-4">
+         data-bs-ride="carousel"
+         style="max-height: 400px; overflow: hidden;">
+        <div class="carousel-inner rounded-4" style="height: 400px;">
             {% for produto in produtos %}
-                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <div class="carousel-item {% if forloop.first %}active{% endif %}" style="height: 400px;">
                     <img src="{{ produto.imagem.url }}"
-                         class="d-block w-100"
+                         class="d-block w-100 h-100 object-fit-cover"
                          alt="{{ produto.nome }}">
                 </div>
             {% endfor %}
@@ -32,10 +33,13 @@
             <span class="visually-hidden">Próximo</span>
         </button>
     </div>
+
     <!-- Produtos -->
     <div class="row">
         {% for produto in produtos %}
-            <div class="col-md-4 mb-4">{% include 'loja/produto_card.html' %}</div>
+            <div class="col-md-4 mb-4 d-flex">
+                {% include 'loja/produto_card.html' %}
+            </div>
         {% endfor %}
     </div>
 {% endblock %}
