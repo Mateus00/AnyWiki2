@@ -1,0 +1,38 @@
+{% extends "blog/base.html" %}
+{% block head_title %}Novo Post{% endblock head_title %}
+{% block blog_content %}
+<div class="card shadow-sm">
+  <div class="card-body">
+    <h3 class="card-title mb-4">Criar novo post</h3>
+
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="titulo" class="form-label">Título</label>
+        <input type="text" class="form-control" name="titulo" required>
+      </div>
+      <div class="mb-3">
+        <label for="url" class="form-label">Slug (url)</label>
+        <input type="text" class="form-control" name="url" required>
+      </div>
+      <div class="mb-3">
+        <label for="categoria" class="form-label">Categoria</label>
+        <select class="form-control" name="categoria_id" required>
+          {% for cat in categorias %}
+            <option value="{{ cat.id }}">{{ cat.titulo }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="corpo" class="form-label">Corpo do post</label>
+        <textarea class="form-control" name="corpo" rows="6" required></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="imagem" class="form-label">Imagem</label>
+        <input type="file" class="form-control" name="imagem">
+      </div>
+      <button type="submit" class="btn btn-primary">Salvar</button>
+    </form>
+  </div>
+</div>
+{% endblock blog_content %}

@@ -1,16 +1,42 @@
 {% extends "blog/base.html" %}
+
 {% block head_title %}
-    {{ post.titulo }}
+  {{ post.titulo }}
 {% endblock head_title %}
+
 {% block title %}
-    {{ post.titulo }}
+  {{ post.titulo }}
 {% endblock title %}
+
 {% block blog_content %}
-    <div class="well">
-        <h4>
-            Categoria: <a href='{{ post.categoria.get_url_absoluta }}'>{{ post.categoria.titulo }}</a>
-        </h4>
-        <p>Postado em: {{ post.data|date:"d/m/Y" }}</p>
+  <div class="card mb-4 shadow-sm overflow-hidden">
+    {% if post.imagem %}
+      <img src="{{ post.imagem.url }}"
+           alt="Imagem do post: {{ post.titulo }}"
+           class="card-img-top object-fit-cover"
+           style="max-height: 350px; width: 100%; object-fit: cover;">
+    {% endif %}
+
+    <div class="card-body px-4 py-3">
+      <h1 class="card-title text-break fs-3 fw-bold mb-3">
+        {{ post.titulo }}
+      </h1>
+
+      <h6 class="mb-3">
+        Categoria:
+        <a href="{{ post.categoria.get_url_absoluta }}"
+           class="text-decoration-none text-light">
+          {{ post.categoria.titulo }}
+        </a>
+      </h6>
+
+      <div class="card-text lh-lg fs-6 mb-4">
+        {{ post.corpo|safe }}
+      </div>
+
+      <p class="small mb-0">
+        Postado em: {{ post.data|date:"d/m/Y" }}
+      </p>
     </div>
-    {{ post.corpo }}
+  </div>
 {% endblock blog_content %}

@@ -18,6 +18,7 @@ class Blog(models.Model):
     corpo = models.TextField()
     data = models.DateField(db_index=True, auto_now_add=True)
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
+    imagem = models.ImageField(upload_to='posts/', blank=True, null=True)  # <-- novo campo
 
     def __str__(self):
         return self.titulo

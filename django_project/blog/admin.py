@@ -3,7 +3,9 @@ from blog.models import Blog, Categoria
 
 class BlogAdmin(admin.ModelAdmin):
     exclude = ['data']
-    prepopulated_fields = {'url': ('titulo',)}  # corrigido de 'slug' para 'url'
+    prepopulated_fields = {'url': ('titulo',)}
+    list_display = ('titulo', 'data', 'categoria')
+    fields = ('titulo', 'corpo', 'imagem', 'categoria')# corrigido de 'slug' para 'url'
 
 class CategoriaAdmin(admin.ModelAdmin):
     prepopulated_fields = {'url': ('titulo',)}  # corrigido de 'slug' para 'url'

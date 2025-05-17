@@ -1,24 +1,27 @@
 {% extends "blog/base.html" %}
-
 {% block head_title %}Vendo categoria {{ categoria.titulo }}{% endblock %}
 {% block title %}{{ categoria.titulo }}{% endblock %}
-
 {% block blog_content %}
-<div class="container my-4">
-    <h2 class="mb-4 text-center">{{ categoria.titulo }}</h2>
-
     {% if posts %}
-        <div class="list-group">
-            {% for post in posts %}
-                <a href="{{ post.get_url_absoluta }}" class="list-group-item list-group-item-action">
-                    {{ post.titulo }}
-                </a>
-            {% endfor %}
-        </div>
+        {% for post in posts %}
+            <div class="card mb-4 shadow-sm">
+                {% if post.imagem %}
+                    <img src="{{ post.imagem.url }}"
+                         class="img-fluid mb-3 rounded"
+                         alt="{{ post.titulo }}">
+                {% endif %}
+                <div class="card-body px-4 py-3">
+                    <h5 class="card-title text-break fs-4 fw-semibold">
+                        <a href="{{ post.get_url_absoluta }}"
+                           class="text-decoration-none text-light">{{ post.titulo }}</a>
+                    </h5>
+                    <h6 class="card-subtitle mb-3 small">Postado em {{ post.data|date:"d/m/Y" }}</h6>
+                    <p class="card-text lh-lg fs-6">{{ post.corpo|truncatewords:40 }}</p>
+                    <a href="{{ post.get_url_absoluta }}" class="card-link">Leia mais...</a>
+                </div>
+            </div>
+        {% endfor %}
     {% else %}
-        <div class="alert alert-warning text-center" role="alert">
-            Não existem posts para essa categoria.
-        </div>
+        <div class="alert alert-warning text-center" role="alert">Não existem posts para essa categoria.</div>
     {% endif %}
-</div>
 {% endblock %}
