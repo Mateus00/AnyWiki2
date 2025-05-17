@@ -27,3 +27,12 @@ Thumbs.db
 # Arquivos estáticos e de mídia gerados
 /staticfiles/
 /media/
+
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+*.log
+media/
+.env
