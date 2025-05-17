@@ -5,7 +5,7 @@ from django.utils.text import slugify
 def index(request):
     return render(request, 'blog/home.html', {
         'categorias': Categoria.objects.all(),
-        'posts': Blog.objects.all()[:5]
+        'posts': Blog.objects.all()
     })
 
 def ver_post(request, slug):
