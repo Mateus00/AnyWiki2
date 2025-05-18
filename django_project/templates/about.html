@@ -1,17 +1,48 @@
-
 {% extends "layout.html" %}
-
-{% block head_title %}
-    Sobre
-{% endblock %}
-
-{% block tittle %}
-    Sobre
-{% endblock %}
-
+{% block head_title %}Sobre{% endblock %}
 {% block content %}
-
-<h1>Sobre Nós</h1>
-<p>Welcome to my page about us</p>
-
-{% endblock content %}
+    <div class="container mt-4" data-ad-client="off">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="card shadow-lg rounded-4 border-0">
+                    <div class="card-body p-4">
+                        <h1 class="card-title mb-4">
+                            <i data-lucide="info" class="me-2"></i>Sobre o Projeto
+                        </h1>
+                        <p class="lead">
+                            Bem-vindo ao <strong>AnyWiki</strong>, um espaço dedicado ao compartilhamento e organização de dados úteis, arquivos, projetos e informações relevantes de forma prática, acessível e colaborativa.
+                        </p>
+                        <p>
+                            A ideia por trás do site é simples: centralizar conteúdos que considero importantes — desde pequenos códigos e ferramentas, até bancos de dados com informações que podem ajudar estudantes, desenvolvedores ou qualquer pessoa que busque conhecimento.
+                        </p>
+                        <h3 class="mt-4">
+                            <i data-lucide="target" class="me-2"></i>Objetivos
+                        </h3>
+                        <ul>
+                            <li>Organizar dados e arquivos de forma clara e pesquisável.</li>
+                            <li>Criar uma base de dados útil, que pode ser expandida com o tempo.</li>
+                            <li>Oferecer acesso gratuito e aberto ao conteúdo, sem barreiras.</li>
+                        </ul>
+                        <h3 class="mt-4">
+                            <i data-lucide="cpu" class="me-2"></i>Tecnologias utilizadas
+                        </h3>
+                        <p>Este site foi desenvolvido com:</p>
+                        <ul>
+                            <li>Django (backend)</li>
+                            <li>Bootstrap (frontend responsivo)</li>
+                            <li>PythonAnywhere (hospedagem)</li>
+                            <li>GitHub (controle de versão)</li>
+                        </ul>
+                        <h3 class="mt-4">
+                            <i data-lucide="handshake" class="me-2"></i>Como contribuir
+                        </h3>
+                        <p>
+                            Se você deseja sugerir melhorias, corrigir erros ou colaborar com dados, entre em contato ou envie um pull request pelo GitHub do projeto.
+                        </p>
+                        <p class="mt-4">Obrigado por visitar, e espero que o conteúdo aqui seja útil para você!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
