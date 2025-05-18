@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block head_title %}
+    {{ produto.nome }}
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <!-- Card de detalhes -->
+      <div class="card shadow-lg border-0 rounded-4">
+        <img src="{{ produto.imagem.url }}" class="card-img-top rounded-top-4" alt="{{ produto.nome }}">
+        <div class="card-body">
+          <h2 class="card-title">{{ produto.nome }}</h2>
+          <h4 class="text-success">R$ {{ produto.preco }}</h4>
+          <p class="card-text mt-3">{{ produto.descricao }}</p>
+
+          <!-- Botão funcional -->
+          <a href="{% url 'loja:adicionar_ao_carrinho' produto.id %}" class="btn btn-primary rounded-pill mt-3 px-4 py-2">
+            <i class="bi bi-cart-plus me-2"></i>Adicionar ao Carrinho
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Produtos relacionados -->
+  <div class="row mt-5">
+    <div class="col-12">
+      <h4 class="text-light mb-3"><i class="bi bi-stars me-2"></i>Produtos Relacionados</h4>
+      <div class="d-flex gap-3 flex-nowrap overflow-auto px-2 pb-2">
+        {% for item in relacionados %}
+          <a href="{% url 'loja:detalhe_produto' item.id %}" class="text-decoration-none">
+            <div class="card bg-dark border-0 rounded-4 text-light" style="min-width: 180px;">
+              <img src="{{ item.imagem.url }}" class="card-img-top rounded-top-4" alt="{{ item.nome }}">
+              <div class="card-body">
+                <h6 class="card-title mb-1">{{ item.nome }}</h6>
+                <p class="card-text text-success mb-0">R$ {{ item.preco }}</p>
+              </div>
+            </div>
+          </a>
+        {% empty %}
+          <p class="text-muted">Nenhum produto relacionado encontrado.</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Botão flutuante do carrinho -->
+<button class="btn btn-outline-light position-fixed bottom-0 end-0 m-4 rounded-circle shadow-lg d-flex align-items-center justify-content-center"
+        style="width: 60px; height: 60px; z-index: 1050;" data-bs-toggle="offcanvas" data-bs-target="#carrinhoDrawer">
+  <i class="bi bi-cart-fill fs-4"></i>
+</button>
+
+<!-- Gaveta lateral do carrinho -->
+<div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="carrinhoDrawer" aria-labelledby="carrinhoDrawerLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="carrinhoDrawerLabel"><i class="bi bi-cart-fill me-2"></i>Seu Carrinho</h5>
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Fechar"></button>
+  </div>
+  <div class="offcanvas-body">
+    {% if carrinho %}
+      <ul class="list-group list-group-flush">
+        {% for item in carrinho %}
+          <li class="list-group-item bg-transparent text-white d-flex justify-content-between align-items-center">
+            <div>
+              {{ item.quantidade }}x {{ item.produto.nome }}
+              <div class="text-success small">R$ {{ item.produto.preco|floatformat:2 }}</div>
+            </div>
+            <a href="{% url 'loja:remover_do_carrinho' item.produto.id %}" class="btn btn-sm btn-outline-danger">
+              <i class="bi bi-trash"></i>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="text-muted">Seu carrinho está vazio.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

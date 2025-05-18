@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="text-light mb-4">Categoria: {{ categoria.nome }}</h2>
+  <div class="row">
+    {% for produto in produtos %}
+      <div class="col-md-4 mb-4">
+        <div class="card bg-dark text-white h-100 rounded-4 shadow-lg">
+          <img src="{{ produto.imagem.url }}" class="card-img-top rounded-top-4" alt="{{ produto.nome }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ produto.nome }}</h5>
+            <p class="card-text text-success fw-bold">R$ {{ produto.preco }}</p>
+            <a href="{% url 'loja:detalhe_produto' produto.id %}" class="btn btn-outline-light btn-sm rounded-pill">Ver Detalhes</a>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <div class="col-12">
+        <p class="text-light">Nenhum produto encontrado nesta categoria.</p>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

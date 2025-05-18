@@ -1,4 +1,3 @@
-
 {% extends "layout.html" %}
 {% load static %}
 
@@ -6,15 +5,126 @@
     Home Page
 {% endblock %}
 
-{% block tittle %}
-    Home Page
-{% endblock %}
-
 {% block content %}
+<style>
+  @media (max-width: 768px) {
+    .carousel-principal {
+      height: 300px !important;
+    }
+    .mini-card {
+      width: 70vw !important;
+      min-width: 70vw !important;
+    }
+    .mini-card img {
+      height: 180px !important;
+    }
+    .card-post {
+      font-size: 0.9rem;
+    }
+  }
+</style>
 
-<h1>Home Page</h1>
-<p>Welcome to my world</p>
+<div class="container-fluid mt-4">
+  <div class="row">
 
-<img src="{% static 'images/Coin.png' %}" class="img-fluid" alt="...">
+    <!-- Seção Esquerda - Produtos da Loja -->
+    <div class="col-lg-8 mb-4">
+      <div class="card shadow-sm rounded-4 border-0 p-4 h-100 bg-transparent">
 
+        <!-- Carrossel Principal -->
+        <div id="carrosselProdutos" class="carousel slide mb-4" data-bs-ride="carousel">
+          <div class="carousel-inner rounded-4 overflow-hidden carousel-principal" style="height: 400px;">
+            {% for produto in produtos_destaque %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+              <a href="{% url 'loja:produto_detalhes' produto.pk %}" class="text-decoration-none text-white">
+                <div class="position-relative h-100">
+                  <img src="{{ produto.imagem.url }}" class="d-block w-100 h-100 object-fit-cover" alt="{{ produto.nome }}">
+                  <div class="position-absolute bottom-0 start-0 w-100 text-white bg-dark bg-opacity-50 p-3">
+                    <h5 class="mb-1">{{ produto.nome }}</h5>
+                    <p class="mb-0">R$ {{ produto.preco }}</p>
+                  </div>
+                </div>
+              </a>
+            </div>
+            {% endfor %}
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carrosselProdutos" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carrosselProdutos" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </button>
+        </div>
+
+        <!-- Carrossel Horizontal Menor -->
+        <div class="mb-4">
+          <h5 class="text-light mb-3"><i class="bi bi-lightning-charge me-2"></i>Ofertas Relâmpago</h5>
+          <div id="miniCarrossel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="d-flex gap-3 justify-content-start flex-nowrap overflow-auto px-2">
+
+                  {% for produto in ofertas %}
+                  <a href="{% url 'loja:produto_detalhes' produto.pk %}" class="text-decoration-none text-white">
+                    <div class="card bg-transparent border-0 text-light mini-card" style="width: 180px; min-width: 180px;">
+                      <div class="rounded overflow-hidden" style="height: 180px;">
+                        <img src="{{ produto.imagem.url }}" class="img-fluid rounded w-100 h-100 object-fit-cover" alt="{{ produto.nome }}">
+                      </div>
+                      <div class="mt-2">
+                        <h6 class="mb-1 text-truncate">{{ produto.nome }}</h6>
+                        <p class="mb-0">R$ {{ produto.preco }}</p>
+                      </div>
+                    </div>
+                  </a>
+                  {% endfor %}
+
+                </div>
+              </div>
+            </div>
+
+            <!-- Setas laterais -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#miniCarrossel" data-bs-slide="prev" style="width: 5%;">
+              <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#miniCarrossel" data-bs-slide="next" style="width: 5%;">
+              <span class="carousel-control-next-icon"></span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Banner Promocional -->
+        <div class="mb-2">
+          <img src="{% static 'images/vdVU8C.jpg' %}" alt="Banner Loja" class="img-fluid rounded-4 w-100">
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Seção Direita - Últimos Posts -->
+    <div class="col-lg-4">
+      <div class="sticky-top" style="top: 1rem;">
+        <div class="card shadow-sm rounded-4 border-0 p-3">
+          <h4 class="mb-3"><i class="bi bi-clock-history me-2"></i>Últimos Posts</h4>
+
+          {% for post in ultimos_posts %}
+          <a href="{{ post.get_absolute_url }}" class="text-decoration-none">
+            <div class="card bg-transparent border-0 mb-3 shadow-sm rounded-4 text-light card-post" style="backdrop-filter: blur(6px); background-color: rgba(255,255,255,0.05);">
+              {% if post.imagem %}
+              <img src="{{ post.imagem.url }}" class="card-img-top rounded-top-4" alt="{{ post.titulo }}">
+              {% endif %}
+              <div class="card-body p-3">
+                <h5 class="card-title text-light mb-1">{{ post.titulo }}</h5>
+                <p class="card-text small text-light-50 mb-0">{{ post.resumo|truncatewords:16 }}</p>
+              </div>
+            </div>
+          </a>
+          {% empty %}
+          <p class="text-muted">Nenhum post encontrado.</p>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
 {% endblock content %}
